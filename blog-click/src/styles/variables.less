@@ -1,0 +1,82 @@
+@layoutHeaderBj: #fff;
+@layoutHeaderHeight: 60px;
+@basecolor: #00c2ff;
+@objectcolor: #6bc30d;
+// 每一次class类名中有一些属性是组合属性，为了避免每一次都要重复写如此大的一段css代码
+// 重复的那一部分代码，我不想让它编译出来，成为无用的代码
+// 第一种，会编译
+// .clearfixW {
+//   content: "";
+//   display: block;
+//   width: 0;
+//   height: 0;
+//   clear: both;
+//   overflow: hidden;
+// }
+// 第二种，不会编译出来
+.clearfixW() {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+}
+// function a () {
+//   return 'content: "";
+//   display: block;
+//   width: 0;
+//   height: 0;
+//   clear: both;
+//   overflow: hidden;'
+// }
+.clearfix {
+  &:after {
+    .clearfixW()
+  }
+  &:before {
+    .clearfixW()
+  }
+}
+
+// 变量名，必须要用大括号包裹
+// 变量值，不需要用大括号包裹
+// 同时也声明默认值
+.border-one(@attr: border, @color: red) {
+  @{attr}-width: 1px;
+  @{attr}-color: @color;
+}
+
+.border() {
+  .border-one(@color: yellow)
+}
+.border-top() {
+  .border-one(border-top, blue)
+}
+
+.border-bottom() {
+  .border-one(border-bottom)
+}
+
+// 左侧固定，右侧自适应
+.a() { // 左侧
+  float: left;
+  height: 200px;
+  width: 200px;
+  background: red;
+}
+
+.b() { // 右侧
+  margin-left: 200px;
+  width: calc(~'100% -200px');
+}
+.basepoint() {
+  position: absolute;
+  right: 0;
+  z-index: 111;
+}
+.about-me() {
+  margin-bottom: 20px;
+  padding-left: 40px;
+  font-size: 16px;
+}
