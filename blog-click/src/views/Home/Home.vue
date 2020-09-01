@@ -3,7 +3,7 @@
     <div class="bg" :style="'height: '+ bgHeight+'px'">
       <div class="bg-content loading waiting">
         <h1 class="title"> PY's Blog</h1>
-        <h3 class="sub-title">一位90后奋斗女青年</h3>
+        <h3 class="sub-title">welcome to my blog</h3>
         <el-button class="btn" type="primary" @click="handleClickToblog">Enter blog</el-button>
       </div>
       <i @click="handletoHot" class="el-icon-arrow-down bg-icon"></i>
@@ -48,12 +48,7 @@
           v-for="(item,index) in articleHotList"
           :key="index"
         >
-          <!-- <div class="img">
-            <img :src="item.surface" alt="">
-            <div class="to-detail">
-              <router-link :to="'article/'+item._id"><i class="el-icon-link" /></router-link>
-            </div>
-          </div> -->
+
           <div class="detail">
             <div class="title"><a href="javascript:;">{{item.title}}</a></div>
             <div class="time">{{item.date}}</div>
@@ -79,8 +74,8 @@
   </div>
 </template>
 <script>
-import request from '../../api/index'
-const getArticleHot = request.getArticleHot
+import {getArticleHot} from '@/api/index'
+// const getArticleHot = request.getArticleHot
 export default {
   name: 'Home',
   data() {
@@ -89,9 +84,9 @@ export default {
       ifclick: false,
       articleHotList: [],
       imgurl: [
-        require('../../assets/images/home/1.jpg'),
-        require('../../assets/images/home/2.jpg'),
-        require('../../assets/images/home/3.jpg'),
+        require('@/assets/images/home/1.jpg'),
+        require('@/assets/images/home/2.jpg'),
+        require('@/assets/images/home/3.jpg'),
 
       ]
     }
@@ -136,7 +131,7 @@ export default {
   mounted() {
         // 获取3篇热门文章
     getArticleHot(3).then((res) => {
-      this.articleHotList = res.data.data
+      this.articleHotList = res.data
       console.log(this.articleHotList)
     })
       // 监听窗口大小
@@ -164,7 +159,7 @@ export default {
     position: relative;
     width: 100%;
     background-color: pink;
-    background: url("../../assets/images/6.jpg") center center/cover no-repeat;
+    background: url("../../assets/images/7.jpg") center center/cover no-repeat;
     &::after {
       position: absolute;
       display: block;

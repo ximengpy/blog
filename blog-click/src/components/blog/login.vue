@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import request from '@/api/index'
-const postLogin = request.postLogin
+import {postLogin} from '@/api/index'
   export default {
     name: "Login",
     props : ["dialogVisible"],
@@ -95,11 +94,12 @@ const postLogin = request.postLogin
           if (valid) {
             //验证都通过
             postLogin(this.form).then(res=>{
-              if (res.data.code){
+              // console.log(res)
+              if (res.code){
                 this.submitDisabled = false;
                 //登录失败
                 this.$message({
-                  message: res.data.msg,
+                  message: res.msg,
                   type: 'error',
                   duration : 2000
                 });
@@ -107,7 +107,7 @@ const postLogin = request.postLogin
               else{
                 //登录成功
                 this.$message({
-                  message: res.data.msg,
+                  message: res.msg,
                   type: 'success',
                   duration : 2000
                 });
@@ -117,7 +117,7 @@ const postLogin = request.postLogin
               }
             }).catch(e=>{
               this.$message({
-                message: "登录失败请稍后再试~",
+                message: e,
                 type: 'error',
                 duration : 2000
               });

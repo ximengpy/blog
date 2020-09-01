@@ -5,7 +5,7 @@
       <div class="content">
         <article>
           <section>
-            <h2>留言板</h2>
+            <h3>留言板</h3>
             <p>沟通交流，拉近你我！</p>
             <RichText @Sub="handleSubmit"></RichText>
           </section>
@@ -54,14 +54,9 @@
 </template>
 
 <script>
-  import Nav from "../../components/layout/Header";
-  import RichText from "../../views/Message/components/rechText";
-  import request from "../../api/index"
-
-  const postIfLogin = request.postIflogin;
-  const commitMessage = request.commitMessage;
-  const getMessageList = request.getMessageList;
-  const commitChildMessage = request.commitChildMessage;
+  import Nav from "@/components/layout/Header";
+  import RichText from "@/views/Message/components/rechText";
+  import {postIflogin,commitMessage, getMessageList, commitChildMessage } from "@/api/index"
 
   function toTwo(num){
     return (num<10?"0":"") + num;
@@ -94,36 +89,35 @@
     },
     inject: ['reload'],
     methods : {
-      handleSubmit(val){
-
-        postIfLogin()
-          .then(res=>{
-            if (res.data.userInfo) {
-              //登陆了，就发送数据到数据库 -- 执行留言提交的ajax
-              commitMessage({
-                user : res.data.userInfo._id,
+      // async ifLogin() {
+      //   await postIflogin().then(res =>{
+      //     console.log(res)
+      //     if(res.userInfo) {
+      //       return true
+      //     }else return false
+      //   })
+      // },
+      async handleSubmit(val){
+        let res = await postIflogin()
+        if(res.userInfo) {
+          commitMessage({
+                user : res.userInfo._id,
                 content : val
               }).then(res=>{
-                if (res.data.code === 0) {
+                if (res.code === 0) {
                   layer.msg('留言成功', {icon: 1});
                   this.reload()
                 }else{
-                  layer.msg(res.data.msg, {icon: 2});
+                  layer.msg(res.msg, {icon: 2});
                 }
 
-              }).catch(()=>{
-                layer.msg('服务器错误~请稍后再试', {icon: 2});
+              }).catch((err)=>{
+                layer.msg(err, {icon: 2});
               });
-
-            }else{
-              //未登录
+        }else {
+          //未登录
               layer.msg('请先登录', {icon: 2});
-            }
-          })
-          .catch(()=>{
-            //服务出错
-            layer.msg('服务器错误~请稍后再试', {icon: 2});
-          });
+        }
 
       },
       replyClick(pIndex,cIndex){
@@ -153,39 +147,31 @@
           parentData.reply.lastIndexArr=[pIndex,cIndex];
         }
       },
-      childCommit(pIndex){
+      async childCommit(pIndex){
         //判断登录
-        postIfLogin()
-          .then(res=>{
-            if (res.data.userInfo) {
-              //登陆了，就发送数据到数据库 -- 执行留言提交的ajax
-              commitChildMessage({
-                parentId : this.commentList[pIndex]._id,
-                user:res.data.userInfo._id,
-                content: this.commentList[pIndex].reply.content,
-                reUser : this.commentList[pIndex].reply.reUser
-              })
-                .then(res=>{
-                  if (res.data.code) {
-                    //code不为0，评论失败
-                    layer.msg(res.data.msg, {icon: 2});
-                  }else{
-                    //code为0，评论成功
-                    layer.msg('评论成功', {icon: 1});
-                    setTimeout(()=>{
-                      window.location.reload();
-                    },500);
-                  }
-                })
-            }else{
-              //未登录
-              layer.msg('请先登录', {icon: 2});
-            }
+        let res = await postIflogin()
+        if (res.userInfo) {
+          //登陆了，就发送数据到数据库 -- 执行留言提交的ajax
+          commitChildMessage({
+            parentId : this.commentList[pIndex]._id,
+            user:res.userInfo._id,
+            content: this.commentList[pIndex].reply.content,
+            reUser : this.commentList[pIndex].reply.reUser
           })
-          .catch(()=>{
-            //服务出错
-            layer.msg('服务器错误~请稍后再试', {icon: 2});
-          });
+            .then(res=>{
+              if (res.code) {
+                //code不为0，评论失败
+                layer.msg(res.msg, {icon: 2});
+              }else{
+                //code为0，评论成功
+                layer.msg('评论成功', {icon: 1});
+                this.reload()
+              }
+            })
+        }else{
+          //未登录
+          layer.msg('请先登录', {icon: 2});
+        }
       },
 
       handleScroll(){
@@ -209,8 +195,9 @@
         this.limit += 5;
         getMessageList(this.skip,this.limit)
           .then(res=>{
-            if (res.data.code === 0) {
-              let data = res.data.data;
+            if (res.code === 0) {
+              let data = res.data;
+              // console.log(data)
               data.forEach(item=>{
                 item.reply={
                   user : "",//id
@@ -222,6 +209,7 @@
                 }
               });
               this.commentList = data;
+              // console.log(this.commentList)
             }
             cb && cb();
           })
@@ -268,8 +256,8 @@
             box-sizing: border-box;
             width: 100%;
             padding: 20px 15px;
-            >h2{
-              font-weight: 700;
+            >h3{
+              font-weight: 600;
               font-size: 1.25rem;
               text-align: center;
             }

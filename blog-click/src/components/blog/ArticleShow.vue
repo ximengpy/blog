@@ -44,9 +44,9 @@
 </div>
 </template>
 <script>
-import request from "../../api/index"
+import {getArticleShow} from "../../api/index"
 
-const getArticleShow = request.getArticleShow
+// const getArticleShow = request.getArticleShow
 export default {
   name: 'ArticleShow',
   mounted() {
@@ -69,10 +69,9 @@ export default {
         getArticleShow(this.id,false)
         .then((res) =>{
           this.ifloading = true
-          let data = res.data.data
+          let data = res.data
           if(data.length){
-            this.articleList.push(...res.data.data)
-            console.log(this.articleList)
+            this.articleList.push(...res.data)
           }else {
             this.ifNomore = true
           }
@@ -83,7 +82,7 @@ export default {
     this.ifNomore = this.ifloading = false
     getArticleShow(this.id,true)
     .then((res) =>{
-      this.articleList= res.data.data
+      this.articleList= res.data
     })
   }
   },

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import Container from '../../components/blog/Container'
+import Container from '@/components/blog/Container'
 export default {
   name: 'Blog',
   components: {

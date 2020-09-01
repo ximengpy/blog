@@ -111,7 +111,7 @@ router.post("/getShow", (req, res) => {
   let options = tag ? {tag} : {}
   article.find(options, {__v: 0}, {skip, limit, sort: {date: -1}})
     .then(data => {
-      console.log(data)
+      // console.log(data)
       res.send({
         code: 0,
         data

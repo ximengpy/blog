@@ -79,11 +79,11 @@
 import Register from '../blog/register'
 import Login from '../blog/login'
 import Avatar from '../blog/avatar'
-import request from '../../api/index'
-const postRegister = request.postRegister;
-const postLogin = request.postLogin
-const postLogout = request.postLogout
-const postIflogin = request.postIflogin
+import {postRegister, postLogin, postLogout, postIflogin} from '../../api/index'
+// const postRegister = request.postRegister;
+// const postLogin = request.postLogin
+// const postLogout = request.postLogout
+// const postIflogin = request.postIflogin
 export default {
   name: 'Header',
   components: {
@@ -145,14 +145,16 @@ export default {
       //  是否登录
       hasLogin() {
         postIflogin().then( res =>{
-          console.log(res.data.userInfo)
-          if (res.data.userInfo) {
+          // console.log(res)
+          if (res.userInfo) {
           this.ifLogin = true
-          this.login.user = res.data.userInfo.user;
-          this.login.photo = res.data.userInfo.photo;
+          this.login.user = res.userInfo.user;
+          this.login.photo = res.userInfo.photo;
           }else{
             this.ifLogin = false
           }
+        }).catch(err =>{
+          console.log(err)
         })
       },
       closeRegister(bool){

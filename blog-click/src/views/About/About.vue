@@ -8,7 +8,7 @@
         <ul class="list">
           <li v-for="(item,index) in about1" :key="index">{{item}}</li>
         </ul>
-        <img src="../../assets/images/core.png" alt="">
+        <img src="@/assets/images/core.png" alt="">
       </div>
       <div class="about-me-2">
           <h2>关于本站</h2>
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import canvass from '../../components/canvass'
+import canvass from '@/components/canvass'
 export default {
   name: 'About',
   data() {

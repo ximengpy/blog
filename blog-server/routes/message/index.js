@@ -7,6 +7,7 @@ const router = express.Router();
 /*提交留言*/
 router.post("/commit",(req,res)=>{
   let {user,content} = req.body;
+  console.log(user, content)
 
   /*验证数据*/
   if (!user || !content){

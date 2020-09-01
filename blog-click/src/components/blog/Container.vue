@@ -67,12 +67,12 @@
  </div>
 </template>
 <script>
-import request from "../../api/index"
+import {getArticleInfo,getArticleHot, getArticleSearch, getVisitor } from "../../api/index"
 import ArticleShow from "./ArticleShow"
-let getArticleInfo = request.getArticleInfo
-let getArticleHot = request.getArticleHot;
-let getArticleSearch = request.getArticleSearch
-let getVisitor = request.getVisitor
+// let getArticleInfo = request.getArticleInfo
+// let getArticleHot = request.getArticleHot;
+// let getArticleSearch = request.getArticleSearch
+// let getVisitor = request.getVisitor
 export default {
 name: 'Container',
 data () {
@@ -113,7 +113,7 @@ methods : {
             getArticleSearch(keywords)
               .then(res=>{
                 console.log(res)
-                this.searchList = res.data.data;
+                this.searchList = res.data;
               })
               .catch(()=>{
                 this.searchList = [];
@@ -127,17 +127,17 @@ methods : {
   // 获取最近访客
   getvisitor() {
     getVisitor().then(res =>{
-      console.log(res)
-      const arrRes = res.data.data
+      // console.log(res)
+      const arrRes = res.data
       const arr = []
       arrRes.forEach((item, index) =>{
-        console.log(item)
+        // console.log(item)
         arr.push({
           photo: item.user.photo,
           user: item.user.user
         })
       })
-      console.log(arr)
+      // console.log(arr)
       this.visitors = arr
     })
   }
@@ -157,10 +157,10 @@ computed:{
 created() {
   getArticleInfo()
   .then((res) =>{
-    this.articleTags = res.data.data.tags
+    this.articleTags = res.data.tags
   })
   getArticleHot().then(res=>{
-        this.articleHot = res.data.data;
+        this.articleHot = res.data;
       });
   //  最近访客
   this.getvisitor()

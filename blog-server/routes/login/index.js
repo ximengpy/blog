@@ -74,6 +74,7 @@ router.post("/",(req,res)=>{
 //验证是否登录
 router.post("/ifLogin",(req,res)=>{
   let data = req.session.login;
+  // console.log(req)
   let resData = false;
   if (data){
     delete data.pwd;
@@ -81,7 +82,8 @@ router.post("/ifLogin",(req,res)=>{
     resData = data;
   }
   res.send({
-    userInfo : resData
+    userInfo : resData,
+    code: 0
   });
 });
 

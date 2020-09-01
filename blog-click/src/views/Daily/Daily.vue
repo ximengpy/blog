@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import canvass from '../../components/canvass'
+import canvass from '@/components/canvass'
 export default {
   name: 'Show',
   data() {

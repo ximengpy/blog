@@ -50,7 +50,7 @@
 <script>
   // import '@/assets/css/markdown/dark.css' //引入代码高亮的css
 import hljs from 'highlight.js'
-  import request from '../../../api/index'
+  import {getArticle ,getArticleExtend } from '@/api/index'
   import Vue from 'vue'
   Vue.directive('highlight', (el) => {
     let blocks = el.querySelectorAll('pre code')
@@ -59,8 +59,8 @@ import hljs from 'highlight.js'
     })
 })
 
-  const getArticle = request.getArticle;;
-  const getArticleExtend = request.getArticleExtend;
+  // const getArticle = request.getArticle;;
+  // const getArticleExtend = request.getArticleExtend;
 
   function toTwo(num){
     return (num<10?"0":"") + num;
@@ -101,12 +101,13 @@ import hljs from 'highlight.js'
       //文章信息
       getArticle(this.$route.params.id)
         .then(res=>{
-          if (res.data.code === 0) {
-            this.articleInfo = res.data.data;
+          console.log(res)
+          if (res.code === 0) {
+            this.articleInfo = res.data;
             //延伸阅读
-            getArticleExtend(res.data.data.tag)
+            getArticleExtend(res.data.tag)
               .then(res=>{
-                this.extendList = res.data.data;
+                this.extendList = res.data;
                 console.log(this.extendList)
               })
 
@@ -136,6 +137,7 @@ import hljs from 'highlight.js'
     word-wrap: normal !important;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
   }
   .message {
     box-sizing: border-box;

@@ -34,10 +34,7 @@
 
 <script>
 
-  import request from '../../api/index'
-  const getRegisterVcode = request.getRegisterVcode;
-  const getRegisterCheckVcode = request.getRegisterCheckVcode;
-  const getpostRegister = request.postRegister
+  import {getRegisterVcode, getRegisterCheckVcode, postRegister} from '../../api/index'
   export default {
     name: "Register",
     props:["dialogVisible"],
@@ -101,7 +98,7 @@
                 cb(new Error("请输入验证码！"));
               }else{
                 getRegisterCheckVcode(value).then(res=>{
-                  if (res.data.code === 0){
+                  if (res.code === 0){
                     cb();
                   }else{
                     cb(new Error("验证码错误"));
@@ -125,20 +122,20 @@
           let t = 0;
           let fn = ()=>{
             t += 1000;
-            if (t > res.data.time){
+            if (t > res.time){
               clearTimeout(this.register.timer);
               this.register.disabled = false;
               this.register.refreshText = "刷新";
             }else{
               this.register.disabled = true;
-              this.register.refreshText = (((res.data.time - t)/1000)|0) + "s后可以刷新";
+              this.register.refreshText = (((res.time - t)/1000)|0) + "s后可以刷新";
             }
           };
           this.register.timer = setInterval(fn,1000);
           fn();
 
           //更新图片
-          this.register.svgText = res.data.data;
+          this.register.svgText = res.data;
         });
       },
     /*注册的点击*/
@@ -147,11 +144,11 @@
         this.$refs["form"].validate((valid) => {
           if (valid) {
             //验证都通过
-            getpostRegister(this.form).then(res=>{
+            postRegister(this.form).then(res=>{
               this.getVCode();
-              if (res.data.code){
+              if (res.code){
                 this.$message({
-                  message: res.data.msg,
+                  message: res.msg,
                   type: 'error',
                   duration : 2000
                 });
