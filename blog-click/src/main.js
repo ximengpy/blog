@@ -34,6 +34,13 @@ new Vue({
 
 Vue.directive('heghtjs', el => {
   let blocks = el.querySelectorAll('pre code');
+  let code = el.querySelectorAll('.code')
+  Array.prototype.forEach.call(code,(item) =>{
+    item.style.color = '#ff502c'
+    item.style.backgroundColor = '#f8f8f8'
+    item.style.padding = '2px 6px'
+  } )
   Array.prototype.forEach.call(blocks, heghtjs.highlightBlock);
+
 });
 

@@ -137,6 +137,7 @@ import hljs from 'highlight.js'
     word-wrap: normal !important;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 16px;
     cursor: pointer;
   }
   .message {
@@ -227,7 +228,15 @@ import hljs from 'highlight.js'
         line-height: 28px;
         position: relative;
         min-height: 200px;
+
+        code {
+          background-color: #fff5f5;
+          color: #ff502c;
+          font-size: .87em;
+          padding: .065em .4em;
+        }
       }
+
 
       section.copyright {
         clear: both;
@@ -290,6 +299,5 @@ import hljs from 'highlight.js'
       }
     }
   }
-
 
 </style>
