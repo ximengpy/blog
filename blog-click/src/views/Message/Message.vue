@@ -15,7 +15,9 @@
                 <div class="comment-parent">
                   <div class="p-img" :style="{backgroundImage:'url('+item.user.photo+')'}"></div>
                   <div class="p-info">
-                    <div class="p-name">{{item.user.user}}</div>
+                    <div class="p-name">{{item.user.user}}
+                      <span v-show="item.user.admin" class="admin">站长</span>
+                    </div>
                     <div class="p-content" v-html="item.content"></div>
                     <div class="p-time">
                       <span>{{item.date | getTime}}</span>
@@ -29,7 +31,9 @@
                   <div class="c-img"  :style="{backgroundImage:'url('+childItem.user.photo+')'}"></div>
                   <div class="c-info">
                     <div class="c-name">
-                      <span class="name">{{childItem.user.user}}</span>回复<span class="name">{{childItem.reUser}}</span>
+                      <span class="name">{{childItem.user.user}}</span><span v-show="childItem.user.admin" class="admin">站长</span>
+                        回复
+                      <span class="name">{{childItem.reUser}}</span><span v-show="childItem.reUser" class="admin">站长</span>
                       <span>{{childItem.content}}</span>
                     </div>
                     <div class="c-time">
@@ -121,7 +125,6 @@
 
       },
       replyClick(pIndex,cIndex){
-        console.log(pIndex, cIndex)
         if (pIndex === undefined)return;
 
         let parentData = this.commentList[pIndex];
@@ -232,8 +235,13 @@
 
       //监听滚动事件
       window.addEventListener("scroll",this.handleScroll);
-    }
-    ,destroyed() {
+      window.addEventListener("scroll",this.throttle);
+
+    },
+    throttle() {
+      console.log(111111)
+    },
+    destroyed() {
       //移除监听滚动事件
       window.removeEventListener("scroll",this.handleScroll);
     }
@@ -274,7 +282,7 @@
             margin-top: 20px;
             padding: 0px 15px 20px;
             width: 100%;
-            background-color: rgba(0,0,0,.1);
+            background-color: #fff;
             >ul{
               width: 100%;
               >li{
@@ -298,7 +306,7 @@
                       color: #01aaed;
                     }
                     .p-content{
-                      padding: 5px 0 5px 5px;
+                      padding: 11px 0 5px 5px;
                       min-height: 30px;
                       font-size: 12px;
                       word-break: break-all;
@@ -381,6 +389,19 @@
           }
         }
       }
+    }
+    & .admin {
+      margin: 0 5px 0 1px;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 35px;
+      height: 18px;
+      padding: 1px 5px 0;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #096;
+      color: #fff;
     }
   }
 
