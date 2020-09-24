@@ -29,7 +29,7 @@
             </p>
             <p class="f-toe">
               本文网址：
-              <a href="https://blog.ximengpy.top">https://blog.ximengpy.top</a>
+              <a href="http://blog.ximengpy.top:3000/">http://blog.ximengpy.top:3000/</a>
             </p>
           </section>
           <section class="extend">
@@ -132,6 +132,7 @@ import hljs from 'highlight.js'
 
 <style scoped lang="less">
 @import url('../../../styles/markdown.less');
+
   .f-toe {
     overflow: hidden;
     word-wrap: normal !important;
@@ -146,6 +147,7 @@ import hljs from 'highlight.js'
     padding: 70px 50px;
     margin: 0 auto;
     color: #515250;
+    overflow: hidden;
 
     .main {
       position: relative;
@@ -170,6 +172,7 @@ import hljs from 'highlight.js'
 
         p {
           color: #787977;
+          margin-top: 10px;
 
           a {
             color: #3e8bc7 !important;
@@ -184,7 +187,6 @@ import hljs from 'highlight.js'
       section.time {
         width: 90px;
         height: 70px;
-        font-family: SourceCodeProRegular, Menlo, Monaco, Consolas, "Courier New", monospace, 'Helvetica Neue', Arial, sans-serif;
         position: absolute;
         right: 10px;
         top: 15px;
@@ -229,7 +231,7 @@ import hljs from 'highlight.js'
         position: relative;
         min-height: 200px;
 
-        code {
+        .code {
           background-color: #fff5f5;
           color: #ff502c;
           font-size: .87em;
@@ -296,6 +298,21 @@ import hljs from 'highlight.js'
       & .ml10 {
         display: block;
         margin-left: 0 !important;
+      }
+      .main {
+        width: 100%;
+        padding-top: 10px;
+      }
+      section.title {
+        & h4 {
+          text-overflow:ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+          margin-bottom: 10px;
+        }
+      }
+      section.time {
+        top: 50px !important;
       }
     }
   }

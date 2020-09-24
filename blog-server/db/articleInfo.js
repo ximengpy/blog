@@ -10,9 +10,9 @@ let articleInfo = mongoose.model("articleInfo",new mongoose.Schema({
 
 }));
 
-// articleInfo.create({
-//   tags : ["HTML&Css","JavaScript","Node","Vue&React","Other"],
-//   num : 0
-// });
+articleInfo.create({
+  tags : ["HTML&Css","JavaScript","Node","Vue&React","Other"],
+  num : 0
+});
 
 module.exports = articleInfo;

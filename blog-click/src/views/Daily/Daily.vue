@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       link: [
+        'http://http://blog_server.ximengpy.top:3001/#/',
         'http://htmldemo.ximengpy.top/华为响应式布局/网页.html',
         'http://travel.ximengpy.top/#/',
         'http://htmldemo.ximengpy.top/小米官网/Noname1.html',
@@ -40,10 +41,16 @@ export default {
       ],
       product:[
         [
+          '个人博客后台管理',
+          '使用框架：vue+elementUi',
+          '通过后台管理可以发布及管理博客文章，管理用户账号，留言的管理等',
+          '可访问地址：'
+        ],
+        [
           '华为响应式布局',
           '使用技术: html+css+flex',
           '主要用到响应式布局来分别写不同屏幕下的不同显示样式',
-          '可访问地址',
+          '可访问地址：',
 
         ],
         [
@@ -57,19 +64,19 @@ export default {
           '小米官网pc端',
           '使用HTML+css',
           '原生HTML+css用时一周,初学前端作品',
-          '可访问地址',
+          '可访问地址：',
         ],
         [
           '原生js飞机大战',
           '使用原生HTML+CSS+Js',
           '原生javascript面向对象的思想开发游戏为一个类,',
-          '可访问地址',
+          '可访问地址：',
         ],
 
         [
           '初学前端学习小demo',
           '网站里面的所有内容均是原生HTML+CSS+Js所写,没有用到任何框架和插件',
-          '可访问地址',
+          '可访问地址：',
         ],
 
       ]

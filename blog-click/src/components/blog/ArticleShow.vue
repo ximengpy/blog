@@ -31,10 +31,10 @@
           <i class="el-icon-view"></i>
           <i>{{item.pv}}</i>
         </span>
-        <span class="comment">
+        <!-- <span class="comment">
           <i class="el-icon-chat-dot-round" style="font-size:18px"></i>
           <i>{{item.comment.length}}</i>
-        </span>
+        </span> -->
       </div>
     </div>
   </section>

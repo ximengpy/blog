@@ -332,12 +332,18 @@ destroyed(){
           ul {
             margin-top: 5px;
             li{
+              display: flex;
               height: 30px;
               line-height: 30px;
               margin: 8px 0;
               a{
+                display: inline-block;
+                width: 220px;
                 color: #787977;
                 font-size: 14px;
+                text-overflow:ellipsis;
+                overflow:hidden;
+                white-space:nowrap;
                 &:hover{
                   color:#6bc30d;
                   text-decoration: underline;
@@ -348,6 +354,7 @@ destroyed(){
                 width: 22px;
                 height: 22px;
                 margin-right: 10px;
+                margin-top: 5px;
                 line-height: 22px;
                 text-align: center;
                 border-radius: 10px;

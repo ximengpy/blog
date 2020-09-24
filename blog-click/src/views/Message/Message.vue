@@ -121,7 +121,7 @@
 
       },
       replyClick(pIndex,cIndex){
-
+        console.log(pIndex, cIndex)
         if (pIndex === undefined)return;
 
         let parentData = this.commentList[pIndex];
@@ -197,7 +197,7 @@
           .then(res=>{
             if (res.code === 0) {
               let data = res.data;
-              // console.log(data)
+              console.log(data)
               data.forEach(item=>{
                 item.reply={
                   user : "",//id
@@ -243,6 +243,8 @@
 
 <style scoped lang="less">
   .Message{
+      background-color: rgba(221, 238, 255, 0.5);
+
     >.main{
       box-sizing: border-box;
       max-width: 1360px;
@@ -255,22 +257,24 @@
           section:nth-child(1){
             box-sizing: border-box;
             width: 100%;
-            padding: 20px 15px;
+            padding: 20px 15px 0;
             >h3{
               font-weight: 600;
-              font-size: 1.25rem;
+              font-size: 0.5rem;
               text-align: center;
             }
             >p{
-              font-size: .5rem;
-              margin: 1rem 0;
+              font-size: .3rem;
+              margin: .3rem 0;
               text-align: center;
             }
           }
           section:nth-child(2){
             box-sizing: border-box;
-            padding: 20px 15px;
+            margin-top: 20px;
+            padding: 0px 15px 20px;
             width: 100%;
+            background-color: rgba(0,0,0,.1);
             >ul{
               width: 100%;
               >li{
@@ -379,4 +383,12 @@
       }
     }
   }
+
+    @media screen and (max-width: 966px) {
+      .Message {
+        .main {
+          padding:70px  10px ;
+        }
+      }
+    }
 </style>

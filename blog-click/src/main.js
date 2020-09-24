@@ -33,10 +33,11 @@ new Vue({
 }).$mount('#app')
 
 Vue.directive('heghtjs', el => {
+  // heghtjs.configure({useBR: true});
   let blocks = el.querySelectorAll('pre code');
   let code = el.querySelectorAll('.code')
   Array.prototype.forEach.call(code,(item) =>{
-    item.style.color = '#ff502c'
+    item.style.color = '#ff7600'
     item.style.backgroundColor = '#f8f8f8'
     item.style.padding = '2px 6px'
   } )

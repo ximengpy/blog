@@ -9,6 +9,7 @@
       </ul>
 
       <el-popover
+          btn-group
           v-if="ifLogin"
           placement="top"
           width="150px"

@@ -1,5 +1,5 @@
 <template>
-  <div class="message"> 
+  <div class="message">
     <textarea id="demo" style="display: none;"></textarea>
     <button type="button" class="layui-btn" @click="handleClick">提交留言</button>
   </div>
@@ -27,7 +27,8 @@
       layui.use('layedit', ()=>{
         this.layedit = layui.layedit;
         this.index = this.layedit.build('demo',{
-          tool : ['face']
+          tool : [''],
+          height: 180
         }); //建立编辑器
       });
     }
@@ -36,6 +37,9 @@
 
 <style scoped lang='less'>
 .message {
-  z-index: 300;
+  z-index: 300 ;
+
 }
+
+
 </style>

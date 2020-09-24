@@ -46,8 +46,6 @@ router.post("/childCommit",(req,res)=>{
     });
     return;
   }
-
-
   //查找父留言数据
   messageDB.findById(parentId)
     .then(data=>{
@@ -83,8 +81,8 @@ router.post("/getList",(req,res)=>{
 
   /*拿取数据*/
   messageDB.find({},{},{skip,limit,sort:{date:-1}})
-    .populate("user",{_id:1,user:1,photo:1})
-    .populate("childrem.user",{_id:1,user:1,photo:1})
+    .populate("user",{_id:1,user:1,photo:1,admin:1})
+    .populate("childrem.user",{_id:1,user:1,photo:1,admin:1})
     .then(data=>{
       res.send({
         code : 0,
