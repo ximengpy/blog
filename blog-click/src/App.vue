@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="'width:'+bgWidth+'px'">
 
-    <Header v-if="isshooHeader" />
+    <Header v-if="isRouterlive" v-show="isshooHeader" />
     <div class="middle-box">
       <router-view v-if='isRouterlive' />
     </div>
@@ -98,7 +98,7 @@ body {
 #app {
   position: relative;
   & .middle-box {
-    min-height: 300px;
+    min-height: 600px;
   }
 }
 .footer {
@@ -184,6 +184,9 @@ body {
 }
 @media screen and (max-width: 966px) {
   #app {
+    & .middle-box {
+    min-height: 600px;
+    }
     & .footer {
       height: 103px;
       & .footer-inner {

@@ -1,13 +1,6 @@
 <template>
   <div class="login-box">
-    <el-dialog
-      title="登录"
-      :visible.sync="dialogVisible"
-      :close-on-click-modal="false"
-      :modal="false"
-      :before-close= 'beforeClose'
-      custom-class='dialog-login'
-    >
+    <div class="login">
       <el-form
           ref="form"
           :model="form"
@@ -22,11 +15,12 @@
         </el-form-item>
 
       </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="handleClick" :disabled="submitDisabled">登录</el-button>
-      </span>
-
-    </el-dialog>
+        <el-button
+          type="primary"
+          @click="handleClick"
+          :disabled="submitDisabled"
+          class="login-btn">登录</el-button>
+    </div>
   </div>
 </template>
 
@@ -34,7 +28,6 @@
 import {postLogin} from '@/api/index'
   export default {
     name: "Login",
-    props : ["dialogVisible"],
     inject:['reload'] ,
     data(){
       return {
@@ -112,8 +105,12 @@ import {postLogin} from '@/api/index'
                   duration : 2000
                 });
                   this.submitDisabled = false;
-                  this.$emit("handleClose", true);
-                  this.reload()
+                  this.$router.back(-1)
+                  setTimeout(() =>{
+                    this.reload()
+                  },80)
+
+                  this.$store.state.ifLogin = true
               }
             }).catch(e=>{
               this.$message({
@@ -130,12 +127,12 @@ import {postLogin} from '@/api/index'
           }
         });
       },
-      beforeClose(done){
-        this.$emit("handleClose");
-      }
     },
 
     mounted() {
+      let {user, pwd} = this.$route.query
+      this.form.user = user ||''
+      this.form.pwd = pwd || ""
     },
     destroyed() {
     }
@@ -145,37 +142,51 @@ import {postLogin} from '@/api/index'
 <style lang="less">
 
   .login-box {
-    .dialog-login {
-      width: 36%;
-    }
-    .el-form{
-      user-select: none;
-      padding-right: 30px;
+    .login-and-register();
+    .login {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 350px;
+      padding: 40px 20px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, .53);
+      .el-form{
+        user-select: none;
+        padding-right: 30px;
 
-      .vcode{
-        .el-input{
-          float: left;
-          width: 35%;
-        }
-        div.svg{
-          float: left;
-          width: 35%;
-          height: 40px;
-          /deep/ svg{
-            width: 100% !important;
-            height: 100% !important;
+        .vcode{
+          .el-input{
+            float: left;
+            width: 35%;
+          }
+          div.svg{
+            float: left;
+            width: 35%;
+            height: 40px;
+            /deep/ svg{
+              width: 100% !important;
+              height: 100% !important;
+            }
+          }
+          .el-link{
+            font-size: 12px;
           }
         }
-        .el-link{
-          font-size: 12px;
-        }
+      }
+      & .login-btn {
+        width: 240px;
+        // text-align: center;
+        margin-left: 80px;
       }
     }
   }
   @media screen and (max-width: 966px)  {
     .login-box {
-      .dialog-login {
-        width: 100%;
+      .login {
+        .dialog-login {
+          width: 100%;
+        }
       }
     }
   }

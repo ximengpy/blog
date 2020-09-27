@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       link: [
-        'http://http://blog_server.ximengpy.top:3001/#/',
+        'http://blog_server.ximengpy.top:3001/',
         'http://htmldemo.ximengpy.top/华为响应式布局/网页.html',
         'http://travel.ximengpy.top/#/',
         'http://htmldemo.ximengpy.top/小米官网/Noname1.html',

@@ -1,12 +1,7 @@
 <template>
   <div class="register-box">
-    <el-dialog
-      title="注册"
-      :visible.sync="dialogVisible"
-      :modal="false"
-      :before-close= 'beforeClose'
-      custom-class='dialog-register'
-    >
+    <div class="register">
+      <h2 class="register-title">注册</h2>
       <el-form
           ref="form"
           :model="form"
@@ -25,10 +20,14 @@
           <el-link type="primary" @click="getVCode" :disabled="register.disabled">{{register.refreshText}}</el-link>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="handleClick" :disabled="register.submitDisabled">立即注册</el-button>
-      </span>
-    </el-dialog>
+      <el-button
+        type="primary"
+        @click="handleClick"
+        :disabled="register.submitDisabled"
+        class="register-btn"
+      >立即注册
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -37,7 +36,6 @@
   import {getRegisterVcode, getRegisterCheckVcode, postRegister} from '../../api/index'
   export default {
     name: "Register",
-    props:["dialogVisible"],
     data(){
       return {
 
@@ -162,7 +160,13 @@
                 });
                 setTimeout(()=>{
                   this.register.submitDisabled = false;
-                  this.$emit("handleClose",true);
+                  this.$router.push({
+                    path: '/login',
+                    query: {
+                      user:this.form.user,
+                      pwd: this.form.pwd
+                    }
+                  })
                 },1800);
               }
             }).catch(e=>{
@@ -182,10 +186,6 @@
         });
       },
 
-      /*关闭的回调*/
-      beforeClose(done){
-        this.$emit("handleClose");
-      }
     },
 
     mounted() {
@@ -198,41 +198,63 @@
 </script>
 
 <style  lang="less">
-
   .register-box {
-    .el-form{
-      user-select: none;
-      padding-right: 30px;
+    .login-and-register();
+    .register {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 350px;
+      padding: 40px 20px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, .53);
 
-      .vcode{
-        .el-input{
-          float: left;
-          width: 35%;
-        }
-        div.svg{
-          float: left;
-          width: 35%;
-          height: 40px;
-          /deep/ svg{
-            width: 100% !important;
-            height: 100% !important;
+      .register-title {
+        text-align: center;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #aaa;
+
+      }
+      .el-form{
+        user-select: none;
+        padding-right: 30px;
+
+        .vcode{
+          .el-input{
+            float: left;
+            width: 35%;
+          }
+          div.svg{
+            float: left;
+            width: 35%;
+            height: 40px;
+            /deep/ svg{
+              width: 100% !important;
+              height: 100% !important;
+            }
+          }
+          .el-link{
+            font-size: 12px;
           }
         }
-        .el-link{
-          font-size: 12px;
-        }
       }
-    }
-    & .dialog-register {
-      width: 36%;
+      & .register-btn {
+        width: 250px;
+        margin-left: 60px;
+      }
     }
   }
 
+
   @media screen and (max-width: 966px) {
     .register-box {
-      & .dialog-register {
-        width: 100%;
+      .register {
+        & .dialog-register {
+          width: 100%;
+        }
       }
     }
+
   }
 </style>

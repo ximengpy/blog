@@ -38,7 +38,11 @@ router.post("/",(req,res)=>{
           //返回前端
           res.send({
             code : 0,
-            msg : "登录成功"
+            msg : "登录成功",
+            data: {
+              user: data.user,
+              photo: data.photo
+            }
           });
 
           /*添加到最近访客列表*/

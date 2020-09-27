@@ -14,7 +14,7 @@
           placement="top"
           width="150px"
           trigger="hover"
-          popper-class = ''>
+          popper-class = 'login-hov'>
         <p class="wel-login">欢迎登陆：{{login.user}}</p>
         <el-button
             type="primary"
@@ -51,8 +51,8 @@
       </el-popover>
 
       <div class="btn-group" v-else>
-        <el-button   @click="ifShowLogin = true"  type="primary">登录</el-button>
-        <el-button  @click="ifShowRegister = true"  type="success">注册</el-button>
+        <el-button  type="primary" @click="$router.push('/login')">登录</el-button>
+        <el-button  type="success" @click="$router.push('/register')">注册</el-button>
       </div>
 
     </div>
@@ -71,8 +71,6 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-    <Login :dialogVisible="ifShowLogin" @handleClose="closeLogin" />
-    <Register :dialogVisible="ifShowRegister" @handleClose="closeRegister" />
     <Avatar :dialogVisible="ifShowAvatar" @handleClose="closeAvatar" />
   </div>
 </template>
@@ -81,10 +79,7 @@ import Register from '../blog/register'
 import Login from '../blog/login'
 import Avatar from '../blog/avatar'
 import {postRegister, postLogin, postLogout, postIflogin} from '../../api/index'
-// const postRegister = request.postRegister;
-// const postLogin = request.postLogin
-// const postLogout = request.postLogout
-// const postIflogin = request.postIflogin
+
 export default {
   name: 'Header',
   components: {
@@ -125,9 +120,9 @@ export default {
         photo: ''
       },
       //是否登录
-      ifLogin: false
+      // ifLogin: false
       /*登录弹窗和注册弹窗*/
-      ,ifShowLogin : false
+      ifShowLogin : false
       ,ifShowRegister : false
       ,ifShowAvatar : false
     }
@@ -136,6 +131,9 @@ export default {
     whichActive(){
         let index = this.routerlist.indexOf(this.$route.name);
         return index
+      },
+      ifLogin() {
+        return this.$store.state.ifLogin
       }
   },
   created() {
@@ -146,9 +144,8 @@ export default {
       //  是否登录
       hasLogin() {
         postIflogin().then( res =>{
-          // console.log(res)
           if (res.userInfo) {
-          this.ifLogin = true
+          this.$store.state.ifLogin = true
           this.login.user = res.userInfo.user;
           this.login.photo = res.userInfo.photo;
           }else{
@@ -179,7 +176,8 @@ export default {
               type: 'success',
               duration : 2000
             });
-            this.ifLogin = false
+            this.$store.state.ifLogin = false
+            this.login = {}
             this.reload()
           })
           .catch(()=>{

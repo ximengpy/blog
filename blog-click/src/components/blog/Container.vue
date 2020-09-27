@@ -224,13 +224,14 @@ destroyed(){
             text-align: center;
             padding: 20px 0 10px;
             transform: rotate(0);
-            &:hover {
-              animation: mylint 0.5s linear both infinite;
-            }
+
             & img {
               width: 100px;
               height: 100px;
               border-radius: 50%;
+              &:hover {
+              animation: mylint 0.5s linear both infinite;
+              }
             }
           }
           @keyframes mylint {
