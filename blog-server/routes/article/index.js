@@ -45,6 +45,19 @@ router.post("/", (req, res) => {
     })
 });
 
+// 点赞
+router.post("/like", (req, res) =>{
+  let { _id} = req.body
+  article.findById(_id).then(data =>{
+    article.updateOne({_id}, {$inc: {like: 1}}).then(() =>{})
+    res.send({
+      code: 0,
+      msg: '点赞成功'
+    })
+  })
+
+})
+
 /*延伸阅读*/
 router.post("/extend", (req, res) => {
   let {tag} = req.body;

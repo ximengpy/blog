@@ -31,10 +31,10 @@
           <i class="el-icon-view"></i>
           <i>{{item.pv}}</i>
         </span>
-        <!-- <span class="comment">
-          <i class="el-icon-chat-dot-round" style="font-size:18px"></i>
-          <i>{{item.comment.length}}</i>
-        </span> -->
+        <span class="comment">
+          <i class="iconfont icon-dianzan" style="font-size:16px"></i>
+          <i>{{item.like}}</i>
+        </span>
       </div>
     </div>
   </section>
@@ -45,14 +45,12 @@
 </template>
 <script>
 import {getArticleShow} from "../../api/index"
-
-// const getArticleShow = request.getArticleShow
 export default {
   name: 'ArticleShow',
   mounted() {
     this.getArticleShowFresh(),
-  // 监听滚轮事件
-  window.addEventListener("scroll",this.handleScroll)
+    // 监听滚轮事件
+    window.addEventListener("scroll",this.handleScroll)
   },
   methods:{
     handleScroll() {

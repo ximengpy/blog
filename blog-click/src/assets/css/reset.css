@@ -50,3 +50,9 @@ table {
 img {
   border: 0;
 }
+
+@media screen and (max-width: 966px) {
+  img {
+    width: 100%;
+  }
+}

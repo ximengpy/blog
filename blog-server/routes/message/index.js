@@ -37,7 +37,7 @@ router.post("/commit",(req,res)=>{
 /*提交留言的留言*/
 router.post("/childCommit",(req,res)=>{
   let {parentId,user,content,reUser} = req.body;
-
+  console.log(req)
   //验证数据
   if (!parentId || !user || !content || !reUser){
     res.send({
@@ -83,17 +83,19 @@ router.post("/getList",(req,res)=>{
   messageDB.find({},{},{skip,limit,sort:{date:-1}})
     .populate("user",{_id:1,user:1,photo:1,admin:1})
     .populate("childrem.user",{_id:1,user:1,photo:1,admin:1})
+    .populate("childrem.reUser",{_id:1,user:1,admin:1})
     .then(data=>{
+      console.log(data)
       res.send({
         code : 0,
         msg : "请求成功",
         data
       });
     })
-    .catch(()=>{
+    .catch((err)=>{
       res.send({
         code : 4,
-        msg : "服务器错误",
+        msg : err,
         data : []
       });
     })

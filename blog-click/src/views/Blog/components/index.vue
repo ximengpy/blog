@@ -19,6 +19,9 @@
             <p class="year">{{articleInfo.date | year}}</p>
           </section>
           <section class="content" v-html='articleInfo.content'  v-heghtjs>{{articleInfo.content}}</section>
+          <div class="content-like" @click="handleLike">
+            <p class="like-text">点赞（{{articleInfo.like}}）<i class="iconfont icon-dianzan"></i></p>
+          </div>
           <section class="copyright">
             <p class="f-toe fc-black">
               非特殊说明，本文版权归 py所有，转载请注明出处.
@@ -50,7 +53,7 @@
 <script>
   // import '@/assets/css/markdown/dark.css' //引入代码高亮的css
 import hljs from 'highlight.js'
-  import {getArticle ,getArticleExtend } from '@/api/index'
+  import {getArticle ,getArticleExtend, ArticleLike } from '@/api/index'
   import Vue from 'vue'
   Vue.directive('highlight', (el) => {
     let blocks = el.querySelectorAll('pre code')
@@ -59,8 +62,6 @@ import hljs from 'highlight.js'
     })
 })
 
-  // const getArticle = request.getArticle;;
-  // const getArticleExtend = request.getArticleExtend;
 
   function toTwo(num){
     return (num<10?"0":"") + num;
@@ -101,14 +102,12 @@ import hljs from 'highlight.js'
       //文章信息
       getArticle(this.$route.params.id)
         .then(res=>{
-          console.log(res)
           if (res.code === 0) {
             this.articleInfo = res.data;
             //延伸阅读
             getArticleExtend(res.data.tag)
               .then(res=>{
                 this.extendList = res.data;
-                console.log(this.extendList)
               })
 
           }else{
@@ -125,6 +124,19 @@ import hljs from 'highlight.js'
       handleToRouter(id) {
         this.$router.push('/article/'+id)
         this.reload()
+      },
+      handleLike() {
+        ArticleLike(this.articleInfo._id).then(res => {
+
+          this.articleInfo.like++
+        })
+        .catch(err => {
+          this.$message({
+            message: '点赞失败',
+            type: 'error'
+          })
+        })
+
       }
     }
   }
@@ -223,7 +235,6 @@ import hljs from 'highlight.js'
       }
 
       section.content {
-        border-bottom: 1px solid #e1e2e0;
         padding-bottom: 20px;
         font: 14px/1.5 "Helvetica neue", Helvetica, Tahoma, "lantinghei sc", "Microsoft Yahei", sans-serif;
         margin: 20px 0 0 0;
@@ -236,6 +247,22 @@ import hljs from 'highlight.js'
           color: #ff502c;
           font-size: .87em;
           padding: .065em .4em;
+        }
+      }
+      .content-like {
+        border-bottom: 1px solid #e1e2e0;
+        text-align: center;
+        margin-top: 20px;
+        padding-bottom: 30px;
+
+        & .like-text {
+          width: 100px;
+          height: 30px;
+          line-height: 30px;
+          margin: auto;
+          background-color:#6bc30d;
+          color: #fff;
+          cursor: pointer;
         }
       }
 
@@ -313,6 +340,9 @@ import hljs from 'highlight.js'
       }
       section.time {
         top: 50px !important;
+      }
+      img {
+        width: 100%;
       }
     }
   }

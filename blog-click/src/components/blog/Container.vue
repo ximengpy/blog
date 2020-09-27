@@ -5,6 +5,35 @@
       <article-show></article-show>
     </el-main>
     <el-aside>
+      <div class="my-info">
+        <div class="info-img">
+          <img src="../../assets/images/home/2.jpg" alt="ge" class="img-icon">
+        </div>
+        <span class="info-name">Peng_star_ty</span>
+        <span class="info-address">广东-广州</span>
+         <span class="info-address">前端工程师</span>
+        <div class="info-footer">
+          <span class="footer-title">社交账号</span>
+          <el-popover
+            placement="top-start"
+            width="80"
+            trigger="hover"
+            class="info-com"
+            >
+              <img src="../../assets/images/qq.png" alt="qq" class="qq" width="100%">
+            <el-button slot="reference">QQ</el-button>
+          </el-popover>
+          <el-popover
+            placement="top-start"
+            width="80"
+            trigger="hover"
+            class="info-com"
+            >
+              <img src="../../assets/images/core.png" alt="qq" class="wx" width="100%">
+          <el-button slot="reference">微信</el-button>
+          </el-popover>
+        </div>
+      </div>
       <div :class="['search',{'fixed':ifSearchFixed}]">
         <div class="search-main">
           <input
@@ -40,15 +69,6 @@
           <li v-for="(item,index) in articleHot" :key="index">
             <i>{{index+1}}</i>
             <router-link  :to="/article/+item._id">{{item.title}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="recommend">
-         <ul>
-        <h3>置顶推荐</h3>
-          <li v-if="!!getArticleHotTitle.title">
-            <i>1</i>
-            <router-link :to="/article/+getArticleHotTitle._id">{{getArticleHotTitle.title}}</router-link>
           </li>
         </ul>
       </div>
@@ -194,6 +214,66 @@ destroyed(){
       }
       .el-aside {
         width: 300px;
+        & .my-info {
+          background-color: #fff;
+          padding-bottom: 15px;
+          margin-bottom: 20px;
+          & .info-img {
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            padding: 20px 0 10px;
+            transform: rotate(0);
+            &:hover {
+              animation: mylint 0.5s linear both infinite;
+            }
+            & img {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+            }
+          }
+          @keyframes mylint {
+            0% {
+              transform: rotate(0);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          & .info-name {
+            display: block;
+            font-size: 18px;
+            text-align: center;
+            color: darkgoldenrod;
+            margin: 10px;
+          }
+
+          & .info-address {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            margin:8px;
+            color: #aaa;
+          }
+
+          & .info-footer {
+            & .footer-title {
+              display: block;
+              text-align: center;
+              color: #ccc;
+              margin-bottom: 10px;
+            }
+          }
+
+          & .info-com {
+            margin:20px 0px 10px 50px;
+            & img{
+              width: 100px;
+            }
+          }
+        }
         >.search {
           width: 100%;
           background: #fff;

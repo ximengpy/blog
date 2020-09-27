@@ -17,7 +17,7 @@ let message = mongoose.model('message', new Schema({
       //子留言 内容
       content: {type: String,required: true},
       //子留言 评论对象
-      reUser : {type:String,required: true},
+      reUser : {type:Schema.Types.ObjectId , ref:"user" , required:true},
       // 日期
       date: {type: Date,default: Date.now},
     }

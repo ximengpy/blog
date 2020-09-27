@@ -52,7 +52,7 @@
           <div class="detail">
             <div class="title"><a href="javascript:;">{{item.title}}</a></div>
             <div class="time">{{item.date}}</div>
-            <div class="content">{{item.content}}</div>
+            <div class="content" v-html="item.content">{{item.content}}</div>
             <router-link :to="'article/'+item._id" class="link">阅读更多>></router-link>
           </div>
         </li>

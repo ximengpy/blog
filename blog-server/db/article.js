@@ -10,7 +10,8 @@ let articleSchema = new Schema({
   updateDate: {type: Date, default: Date.now},
   surface : {type:String,default: url.baseUrl+'/img/defaultSurface.jpg'},
   pv : {type: Number,default: 0},
-  comment : [{type:Schema.Types.ObjectID,ref:"comment"}]
+  // comment : [{type:Schema.Types.ObjectID,ref:"comment"}]
+  like: {type: Number,default: 0}
 })
 
 articleSchema.pre("update", function(next) {

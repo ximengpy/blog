@@ -33,25 +33,6 @@ export const getArticleInfo = function() {
       }
     })
   }
-  //获取文章列表
-  // getArticleShow:(
-  //   // 获取文字列表
-  //   function(){
-  //     let skip = 0
-  //     let limit = 5
-  //     return function(index=0,ifFresh) {
-  //       if(ifFresh) {
-  //         skip = 0
-  //         limit = 5
-  //       }
-  //       let tag = ['','HTML&Css','JavaScript','Node','Vue&React','Other'][index]
-  //       let data = {skip,limit,tag}
-  //       skip += limit
-  //       limit = 2
-  //       return axios.post('/api/article/getshow',data)
-  //     }
-  //   }
-  // )()
 
   export const getArticleShow = (function () {
       let skip = 0
@@ -73,6 +54,17 @@ export const getArticleInfo = function() {
       }
   })()
 
+    //给单个文章点赞
+    export const ArticleLike = function(_id) {
+      return request({
+        method: 'post',
+        url: '/api/article/like',
+        data: {
+          _id
+        }
+      })
+    }
+
   //获取延申阅读
   export const getArticleExtend = function(tag) {
     return request({
@@ -90,6 +82,7 @@ export const getArticleInfo = function() {
       data:{ keywords}
     })
   }
+
 
   //获取验证码图片
   export const getRegisterVcode = function(svgCode) {

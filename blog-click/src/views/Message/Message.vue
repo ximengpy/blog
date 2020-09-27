@@ -33,8 +33,8 @@
                     <div class="c-name">
                       <span class="name">{{childItem.user.user}}</span><span v-show="childItem.user.admin" class="admin">站长</span>
                         回复
-                      <span class="name">{{childItem.reUser}}</span><span v-show="childItem.reUser" class="admin">站长</span>
-                      <span>{{childItem.content}}</span>
+                      <span class="name">{{childItem.reUser.user}}</span><span v-show="childItem.reUser.admin" class="admin">站长</span>
+                      <p class="name-content">{{childItem.content}}</p>
                     </div>
                     <div class="c-time">
                       <span>{{childItem.date | getTime}}</span>
@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div :class="['comment-reply',{'show':item.reply.ifShow}]">
-                  <textarea v-model="item.reply.content" :placeholder="'回复【'+item.reply.reUser+'】：'"></textarea>
+                  <textarea v-model="item.reply.content" :placeholder="'回复【'+reUser+'】：'"></textarea>
                   <button @click="childCommit(index)" type="button" class="layui-btn layui-btn-xs">提交</button>
                 </div>
               </li>
@@ -74,7 +74,8 @@
 
         skip : 0,
         limit : 0,
-        ifLoding : false
+        ifLoding : false,
+        reUser: '',
       }
     },
     filters:{
@@ -133,10 +134,12 @@
         //改变placeholder的内容
         if (cIndex !== undefined) {
           //回复的子评论
-          this.commentList[pIndex].reply.reUser = this.commentList[pIndex].childrem[cIndex].user.user;
+          this.commentList[pIndex].reply.reUser = this.commentList[pIndex].childrem[cIndex].user._id;
+          this.reUser = this.commentList[pIndex].childrem[cIndex].user.user
         }else{
           //回复的父评论
-          this.commentList[pIndex].reply.reUser = this.commentList[pIndex].user.user;
+          this.commentList[pIndex].reply.reUser = this.commentList[pIndex].user._id;
+          this.reUser = this.commentList[pIndex].user.user
         }
 
 
@@ -260,12 +263,13 @@
       margin: 0 auto;
       >.content{
         width: 100%;
-        background-color: #fff;
         >article{
           section:nth-child(1){
             box-sizing: border-box;
             width: 100%;
             padding: 20px 15px 0;
+            background-color: #fff;
+
             >h3{
               font-weight: 600;
               font-size: 0.5rem;
@@ -282,7 +286,7 @@
             margin-top: 20px;
             padding: 0px 15px 20px;
             width: 100%;
-            background-color: #fff;
+            background-color: rgba(255,255,255,0.6);
             >ul{
               width: 100%;
               >li{
@@ -308,7 +312,7 @@
                     .p-content{
                       padding: 11px 0 5px 5px;
                       min-height: 30px;
-                      font-size: 12px;
+                      font-size: 16px;
                       word-break: break-all;
                     }
                     .p-time{
@@ -319,7 +323,7 @@
                         padding-right: 15px;
                       }
                       a{
-                        color: blue;
+                        color: goldenrod;
                         cursor: pointer;
                       }
                     }
@@ -345,6 +349,10 @@
                         color: #01aaed;
                         margin: 0 5px;
                       }
+                      .name-content {
+                        padding: 10px 20px 5px;
+                        font-size: 16px;
+                      }
                     }
                     .c-time{
                       padding-left: 20px;
@@ -354,7 +362,7 @@
                       }
                       a{
                         cursor: pointer;
-                        color: blue;
+                        color: goldenrod;
                       }
                     }
                   }

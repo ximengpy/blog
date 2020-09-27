@@ -14,7 +14,7 @@
           placement="top"
           width="150px"
           trigger="hover"
-          popper-class = 'login-hov'>
+          popper-class = ''>
         <p class="wel-login">欢迎登陆：{{login.user}}</p>
         <el-button
             type="primary"
@@ -57,7 +57,7 @@
 
     </div>
 
-      <el-dropdown trigger="click" @command="handleCommand">
+      <el-dropdown trigger="click" @command="handleCommand" >
         <span class="el-dropdown-link">
           <img src="../../assets/images/icon-menu.png" class="el-icon-arrow-down el-icon--right">
         </span>
@@ -230,6 +230,7 @@ imp
       flex: 1;
       display: flex;
       width: 576px;
+      margin-right: 75px;
 
       li {
         flex: 1;
@@ -318,7 +319,11 @@ imp
     & .el-dropdown {
       position: absolute;
       right: 106px;
-      line-height: 80px;
+      margin-top: 17px;
+      // line-height: 80px;
+      ul {
+        top: 40px;
+      }
     }
     .el-dropdown-link {
       cursor: pointer;
