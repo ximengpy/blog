@@ -14,6 +14,10 @@ router.use("/login",require('./login/index'));
 /*留言接口*/
 router.use("/message",require('./message/index'));
 
+// 日记接口
+router.use("/diary",require('./diary/index'));
+
+
 /*最近访客接口*/
 router.use("/visitor",require('./visitor/index'));
 

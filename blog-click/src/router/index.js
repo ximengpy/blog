@@ -26,9 +26,9 @@ const routes = [
     component: () => import('../views/About/About.vue')
   },
   {
-    path: '/daily',
-    name: 'Daily',
-    component: () => import('../views/Daily/Daily.vue')
+    path: '/dialy',
+    name: 'Dialy',
+    component: () => import('../views/Dialy/Dialy.vue')
   },
   {
     path: '/blog/:id',
@@ -36,9 +36,19 @@ const routes = [
     component: () => import('../views/Blog/Blog.vue')
   },
   {
+    path: '/work',
+    name: 'work',
+    component: () => import('../views/Work/Work.vue')
+  },
+  {
     path: '/message',
     name: 'Message',
     component: () => import('../views/Message/Message.vue')
+  },
+  {
+    path: '/links',
+    name: 'Links',
+    component: () => import('../views/Links/index.vue')
   },
   {
     path: '/article/:id',

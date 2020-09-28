@@ -95,10 +95,7 @@ export default {
 <style lang="less" >
   .show{
 
-    position: relative;
-    margin-top: 61px;
-    padding-bottom: 100px;
-    background-color:rgba(221,238,255,.5);
+    .public-page();
     .show-center {
       overflow: hidden;
       width: 60%;

@@ -307,7 +307,7 @@ destroyed(){
             padding: 20px;
             background-color: grey;
             input {
-             position: relative;
+              position: relative;
               z-index: 3;
               width: 100%;
               height: 40px;

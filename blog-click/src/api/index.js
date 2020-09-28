@@ -168,6 +168,14 @@ export const getArticleInfo = function() {
     })
   }
 
+  //日记接口
+  export const getDiary = function() {
+    return request({
+      url: '/api/diary',
+      method: 'get'
+    })
+  }
+
 
 
 //     // 获取最近访客

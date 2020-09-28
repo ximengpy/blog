@@ -103,9 +103,17 @@ export default {
           title: '留言'
         },
         {
-          to: '/daily',
+          to: '/dialy',
+          title: '日记'
+        },
+        {
+          to: '/work',
           title: '个人作品'
         },
+        // {
+        //   to: '/links',
+        //   title: '友链'
+        // },
         {
           to: '/about',
           title: '关于'
