@@ -183,6 +183,7 @@ import {postLogin} from '@/api/index'
   }
   @media screen and (max-width: 966px)  {
     .login-box {
+      height: 600px;
       .login {
         .dialog-login {
           width: 100%;

@@ -102,7 +102,7 @@
                     cb(new Error("验证码错误"));
                   }
                 }).catch(e=>{
-                  cb(new Error("未知错误…"));
+                  cb(new Error(e));
                 });
               }
             },
@@ -249,6 +249,7 @@
 
   @media screen and (max-width: 966px) {
     .register-box {
+      height: 600px;
       .register {
         & .dialog-register {
           width: 100%;

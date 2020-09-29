@@ -324,7 +324,8 @@ imp
 
     & .el-dropdown {
       position: absolute;
-      right: 106px;
+      top: -4px;
+      right: 116px;
       margin-top: 17px;
       // line-height: 80px;
       ul {

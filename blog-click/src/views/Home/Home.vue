@@ -50,7 +50,7 @@
         >
 
           <div class="detail">
-            <div class="title"><a href="javascript:;">{{item.title}}</a></div>
+            <div class="title"><router-link :to="'article/'+item._id">{{item.title}}</router-link></div>
             <div class="time">{{item.date}}</div>
             <div class="content" v-html="item.content">{{item.content}}</div>
             <router-link :to="'article/'+item._id" class="link">阅读更多>></router-link>
@@ -468,8 +468,7 @@ export default {
         }
         }
         & .detail {
-          height: 200px;
-          padding: 20px 12px 0;
+          padding: 20px 12px 8px;
           background-color: rgba(246,243,249,.8);
           & > .title {
             font-size: 20px;
@@ -498,7 +497,7 @@ export default {
           }
           & .link {
             display: block;
-            padding-top: 20px;
+            padding-top: 9px;
             margin: auto;
             color: @basecolor;
             font-size: 18px;
