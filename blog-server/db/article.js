@@ -8,7 +8,6 @@ let articleSchema = new Schema({
   tag : {type: String,required: true},
   date : {type: Date, default: Date.now},
   updateDate: {type: Date, default: Date.now},
-  surface : {type:String,default: url.baseUrl+'/img/defaultSurface.jpg'},
   pv : {type: Number,default: 0},
   // comment : [{type:Schema.Types.ObjectID,ref:"comment"}]
   like: {type: Number,default: 0}
